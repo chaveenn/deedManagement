@@ -1,0 +1,311 @@
+/*----------------- NavBar ----------------*/
+.home-navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+  min-height: 90px;
+  background-color: var(--secondary-color);
+}
+
+.logo-container a {
+  text-decoration: none; 
+  color: inherit; 
+}
+
+.logo-container p {
+  color: var(--dark-color); 
+  font-size: 4rem;
+  font-weight: 600;
+  margin-right: 5rem;
+}
+
+.navbar-links-container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-menu-container {
+  display: none;
+}
+
+.navbar-primary-button {
+  padding: 0.9rem 1.75rem;
+  background-color: var(--dark-color);
+  color: var(--white);
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+.navbar-links-container-links {
+  margin-right: 3rem;
+  text-decoration: none;
+  color: var(--dark-color);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.navbar-primary-button:hover {
+  background-color: var(--primary-color);
+  color: var(--dark-color);
+}
+
+.navbar-menu-container svg {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .navbar-links-container-links {
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
+  .navbar-primary-button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .logo-container {
+    font-size: 3rem;
+  }
+  .navbar-links-container {
+    display: none;
+  }
+  .navbar-menu-container {
+    display: flex;
+  }
+}
+
+/*----------------- Subnavbar ----------------*/
+.subnav-container {
+  display: flex;
+  justify-content: flex-end; 
+  padding: 10px 10%; 
+  background-color: #f1f1f1; 
+}
+
+.subnav-link {
+  margin-left: 20px;
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: 1.1rem; 
+  font-weight: 600; 
+  transition: color 0.3s ease;
+}
+
+
+.subnav-link:hover {
+  color: #74512D; 
+}
+
+
+/*----------------- Footer ----------------*/
+.footer-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 3% 7% 5% 10%;
+  background-color: var(--secondary-color);
+}
+
+.footer-section-one {
+  max-width: 40%;
+}
+
+.footer-section-two {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.footer-section-columns {
+  display: flex;
+  flex-direction: column;
+  min-width: 190px;
+}
+
+.footer-section-columns span {
+  margin: 0.25rem 0;
+  font-weight: 600;
+  color: var(--dark-color);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-section-columns span:hover {
+  color: var(--primary-color);
+}
+
+.footer-logo-text {
+  font-size: 1rem;
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+  .footer-wrapper {
+    flex-direction: column;
+    padding: 5% 10%;
+  }
+  .footer-section-one {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  .footer-section-two {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-section-columns {
+    margin: 1rem 0;
+    width: 100%;
+  }
+}
+
+/*----------------- Form Styles ----------------*/
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #AF8F6F;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #74512D;
+}
+
+.deed-detail-container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+
+
+p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.section-spacing {
+  margin-bottom: 20px;
+}
+
+.button-group {
+  margin-top: 20px;
+}
+
+button {
+  
+  padding: 10px 20px;
+  background-color: #AF8F6F;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #74512D;
+}
+
+.table-container {
+  
+  margin:  auto; 
+  padding: 10px; 
+  background-color: #fff; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+
+
+h2 {
+  color: #74512D;
+  text-align: center;
+}
+
+.edit-deed-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: darkblue;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: blue;
+}
+
+
+
+
