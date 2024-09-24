@@ -98,6 +98,7 @@ export default function DeedDashboard() {
     return (
         <div>
             <NavBar />
+            {/*}
             <div className="dashboard-feature-section">
             <p className="apm-user-welcome">Hello @User</p>
 
@@ -111,6 +112,7 @@ export default function DeedDashboard() {
                     ))}
                 </div>
             </div>
+            /*}
 
             {/* Table to display deeds that are not registered */}
             <div className="dem-table-container">
@@ -146,26 +148,75 @@ export default function DeedDashboard() {
                 <br/>
             </div>
 
-            {/* Dialog box for changing the status */}
-            <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <DialogTitle>Change Deed Status</DialogTitle>
-                <DialogContent>
-                    <Select
-                        value={newStatus}
-                        onChange={(e) => setNewStatus(e.target.value)}
-                        fullWidth
-                    >
-                        <MenuItem value="Approved">Approved</MenuItem>
-                        <MenuItem value="Rejected">Rejected</MenuItem>
-                        <MenuItem value="Registered">Registered</MenuItem>
-                        <MenuItem value="Completed">Completed</MenuItem>
-                    </Select>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCloseDialog}>Cancel</Button>
-                    <Button onClick={handleStatusChange}>Update</Button>
-                </DialogActions>
-            </Dialog>
+            <Dialog 
+  open={openDialog} 
+  onClose={handleCloseDialog} 
+  sx={{ 
+    '& .MuiDialog-paper': { 
+      backgroundColor: '#f5f5f5', // Light background for the dialog
+      width: '400px', // Control width
+      maxWidth: '100%', 
+    }
+  }}
+>
+    <DialogTitle 
+      sx={{ 
+        backgroundColor: '#74512D', // Your theme dark color for title background
+        color: 'white' 
+      }}
+    >
+        Change Deed Status
+    </DialogTitle>
+    
+    <DialogContent>
+        <br/>
+        <Select
+            value={newStatus}
+            onChange={(e) => setNewStatus(e.target.value)}
+            fullWidth
+            sx={{
+                backgroundColor: 'white', // White for select background
+                color: '#000', // Black text
+                '&:hover': {
+                    backgroundColor: '#e0e0e0', // Light gray on hover
+                }
+            }}
+        >
+            <MenuItem value="Approved">Approved</MenuItem>
+            <MenuItem value="Rejected">Rejected</MenuItem>
+            <MenuItem value="Registered">Registered</MenuItem>
+            <MenuItem value="Completed">Completed</MenuItem>
+        </Select>
+    </DialogContent>
+    
+    <DialogActions>
+        <Button 
+          onClick={handleCloseDialog} 
+          sx={{
+              backgroundColor: '#74512D', // Theme dark button color
+              color: 'white',
+              '&:hover': {
+                  backgroundColor: '#5a3d23' // Slightly darker hover
+              }
+          }}
+        >
+          Cancel
+        </Button>
+        
+        <Button 
+          onClick={handleStatusChange} 
+          sx={{
+              backgroundColor: '#5a3d23', // Theme button color
+              color: 'white',
+              '&:hover': {
+                  backgroundColor: '#74512D'
+              }
+          }}
+        >
+          Update
+        </Button>
+    </DialogActions>
+</Dialog>
 
             <Footer />
         </div>

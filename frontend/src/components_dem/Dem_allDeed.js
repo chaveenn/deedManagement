@@ -46,7 +46,7 @@ function AllDeed() {
   };
 
   const handleView = (id) => {
-    navigate(`/deed/${id}`); // Redirect to DeedDetails page with ID
+    navigate(`/deed/${id}`); 
   };
 
   return (

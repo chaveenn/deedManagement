@@ -292,7 +292,7 @@ input {
   padding: 8px;
   box-sizing: border-box;
 }
-
+.dem-table-summary-action
 .button-group
 button {
   background-color: #74512D;
@@ -302,7 +302,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
+.dem-table-summary-action
 .button-group
 button:hover {
   background-color: #AF8F6F;
@@ -400,11 +400,6 @@ button:hover {
    
 }
 
-.dem-table-summary-action {
-  padding: 10px;
-  font-size: 0.9rem;
-  width: 20%;
-}
 
 .dem-table-summary-button {
   display: block;
