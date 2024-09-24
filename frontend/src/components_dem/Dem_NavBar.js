@@ -14,7 +14,7 @@ function DeedNavbar() {
     { text: "Support", link: "/support" },
     { text: "Payment", link: "/payment" },
     { text: "Client", link: "/client" },
-    { text: "Appointment", link: "/appointment" },
+    { text: "Appointment", link: "/apm_dashboard" },
     { text: "Profile", link: "/profile", icon: <AccountCircle /> }, // Profile icon
     { text: "Logout", link: "/logout" }
   ];
@@ -44,7 +44,7 @@ function DeedNavbar() {
           <Link className="navbar-links-container-links" to="/support" aria-label="Go to Support">Support</Link>
           <Link className="navbar-links-container-links" to="/payment" aria-label="Go to Payment">Payment</Link>
           <Link className="navbar-links-container-links" to="/client" aria-label="Go to Client">Client</Link>
-          <Link className="navbar-links-container-links" to="/appointment" aria-label="Go to Appointment">Appointment</Link>
+          <Link className="navbar-links-container-links" to="/apm_dashboard" aria-label="Go to Appointment">Appointment</Link>
           <IconButton component={Link} to="/profile" aria-label="Go to Profile" color="inherit">
             <AccountCircle />
           </IconButton>

@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
 import './deed_management.css';
+import NavBar from "./Dem_NavBar.js";
+import Footer from "./Dem_Footer.js";
 
 function DemDeedDetail() {
   const { id } = useParams();
@@ -80,8 +82,11 @@ function DemDeedDetail() {
   if (!deed) return <p>Loading...</p>;
 
   return (
+    <div>
+      <NavBar/>
     <div className="deed-detail-container">
-      <h2>Deed Details</h2>
+      
+      <h2>Deed Details</h2><br/>
 
       <p><strong>Deed ID:</strong> {deed._id}</p>
 
@@ -113,8 +118,8 @@ function DemDeedDetail() {
       </div>
 
       <div className="button-group">
-        <Button variant="contained" color="primary" onClick={handleUpdateClick}>Update</Button>
-        <Button variant="contained" color="secondary" onClick={handleDelete} style={{ marginLeft: '10px' }}>Delete</Button>
+        <Button onClick={handleUpdateClick}>Update</Button>
+        <Button onClick={handleDelete} style={{ marginLeft: '10px' }}>Delete</Button>
       </div>
 
       {/* Dialog for Editing Specific Deed Fields */}
@@ -162,6 +167,9 @@ function DemDeedDetail() {
           </Button>
         </DialogActions>
       </Dialog>
+      
+    </div>
+    <Footer/>
     </div>
   );
 }

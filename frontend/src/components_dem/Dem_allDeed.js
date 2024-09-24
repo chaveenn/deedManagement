@@ -53,30 +53,31 @@ function AllDeed() {
     <div>
       <NavBar />
       
-      <div className="table-container">
+      <div className="dem-table-container">
+        <h1 className="dem-table-main-heading">All Deeds</h1>
         <TableContainer component={Paper}>
-          <Table aria-label="Deeds Table">
+          <Table aria-label="Deeds Table" className="dem-table-summary">
             <TableHead>
-              <TableRow>
-                <TableCell align="left">Deed Number</TableCell>
-                <TableCell align="left">Lawyer Name</TableCell>
-                <TableCell align="left">Deed Type</TableCell>
-                <TableCell align="left">Grantor</TableCell>
-                <TableCell align="left">Grantee</TableCell>
-                <TableCell align="left">Title</TableCell>
-                <TableCell align="center">Actions</TableCell>
+              <TableRow className="dem-table-summary-row">
+                <TableCell align="left" className="dem-table-summary-header">Deed Number</TableCell>
+                <TableCell align="left" className="dem-table-summary-header">Lawyer Name</TableCell>
+                <TableCell align="left" className="dem-table-summary-header">Deed Type</TableCell>
+                <TableCell align="left" className="dem-table-summary-header">Grantor</TableCell>
+                <TableCell align="left" className="dem-table-summary-header">Grantee</TableCell>
+                <TableCell align="left" className="dem-table-summary-header">Title</TableCell>
+                <TableCell align="center" className="dem-table-summary-header">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {deeds.map((deed) => (
-                <TableRow key={deed._id}>
-                  <TableCell align="left">{deed.deedNo}</TableCell>
-                  <TableCell align="left">{getLawyerNameById(deed.assignedLawyer)}</TableCell>
-                  <TableCell align="left">{deed.deedType}</TableCell>
-                  <TableCell align="left">{deed.grantor ? `${deed.grantor.fname} ${deed.grantor.lname}` : "No Grantor"}</TableCell>
-                  <TableCell align="left">{deed.grantee ? `${deed.grantee.fname} ${deed.grantee.lname}` : "No Grantee"}</TableCell>
-                  <TableCell align="left">{deed.title}</TableCell>
-                  <TableCell align="center">
+                <TableRow key={deed._id} className="dem-table-summary-row">
+                  <TableCell align="left" className="dem-table-summary-data">{deed._id}</TableCell>
+                  <TableCell align="left" className="dem-table-summary-data">{getLawyerNameById(deed.assignedLawyer)}</TableCell>
+                  <TableCell align="left" className="dem-table-summary-data">{deed.deedType}</TableCell>
+                  <TableCell align="left" className="dem-table-summary-data">{deed.grantor ? `${deed.grantor.fname} ${deed.grantor.lname}` : "No Grantor"}</TableCell>
+                  <TableCell align="left" className="dem-table-summary-data">{deed.grantee ? `${deed.grantee.fname} ${deed.grantee.lname}` : "No Grantee"}</TableCell>
+                  <TableCell align="left" className="dem-table-summary-data">{deed.title}</TableCell>
+                  <TableCell align="center" className="dem-table-summary-action">
                     <button onClick={() => handleView(deed._id)}>View</button>
                     <button onClick={() => handleDelete(deed._id)} style={{ marginLeft: '10px' }}>Delete</button>
                   </TableCell>
@@ -85,6 +86,7 @@ function AllDeed() {
             </TableBody>
           </Table>
         </TableContainer>
+        <br/>
       </div>
       <Footer />
     </div>

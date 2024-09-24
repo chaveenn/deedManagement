@@ -57,8 +57,14 @@ const deedSchema = new Schema({
     totalFee: {
         type: Number,
         required: true
+    },
+    deedStatus: {
+        type: String,
+        required: true,
+        enum: ["Pending", "Approved", "Rejected","Created","Registered"], // Define possible statuses
+        default: "Created"
     }
-},{
+}, {
     timestamps: true // Automatically manage createdAt and updatedAt fields
 });
 

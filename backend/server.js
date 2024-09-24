@@ -42,9 +42,10 @@ app.use("/appointment", appointmentRouter);
 
 const deedsRouter = require("./routes/routes_deed");
 app.use("/deeds", deedsRouter);
+app.use("/clients", deedsRouter);
+app.use("/lawyers", deedsRouter);
 
-const clientRoutes = require("./routes/routes_deed"); 
-app.use("/clients", clientRoutes);
+const clients = require("./routes/clients");
+app.use("/clients",clients)
 
-const lawyerRoutes = require("./routes/routes_deed");
-app.use("/lawyers", lawyerRoutes);
+

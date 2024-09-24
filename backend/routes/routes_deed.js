@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Deed = require("../models/model_dem_deed");
-const Client = require("../models/model_cm_client");
-const Lawyer = require("../models/model_atm_lawyer");
+const Client = require("../models/client");//change according to enith's file name for client model
+const Lawyer = require("../models/model_atm_lawyer");////change according to shehara's file name for lawyer model
 const AppointmentRequest = require("../models/model_apm_appointment_request");
-const PaymentRequest = require("../models/model_fin_payment_request"); 
+//const PaymentRequest = require("../models/model_fin_payment_request"); //change according to charitha's file name for payment model
 
 
 // Search client with NIC --------------------------------------------------------------
@@ -174,6 +174,7 @@ router.route("/all_Lawyers").get(async (req, res) => {
     }
 });
 
+/*For later
 // Get counts for deeds, lawyers, clients, appointment requests, and payment requests
 router.get("/dashboard/counts", async (req, res) => {
     try {
@@ -205,11 +206,42 @@ router.get("/dashboard/counts", async (req, res) => {
         res.status(500).json({ message: "Error fetching counts", error: error.message });
     }
 });
+*/
 
 
+// Get all deeds with status not equal to 'Registered'
+router.get("/nonRegisteredDeeds", async (req, res) => {
+    try {
+        const deeds = await Deed.find({ deedStatus: { $ne: "Registered" } })
+            .populate("assignedLawyer", "firstName lastName")
+            .populate("grantor", "fname lname")
+            .populate("grantee", "fname lname");
+        
+        res.json(deeds);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching non-registered deeds", error });
+    }
+});
 
+// Update deed status
+router.put("/updateStatus/:id", async (req, res) => {
+    const { id } = req.params;
+    const { deedStatus } = req.body;
 
+    try {
+        const deed = await Deed.findById(id);
+        if (!deed) {
+            return res.status(404).json({ message: "Deed not found" });
+        }
 
+        deed.deedStatus = deedStatus;
+        await deed.save();
 
+        res.json({ message: "Deed status updated", deed });
+    } catch (error) {
+        res.status(500).json({ message: "Error updating deed status", error });
+    }
+});
 
 module.exports = router;
+
