@@ -306,6 +306,49 @@ button:hover {
   background-color: blue;
 }
 
+/*----------------- Dashboard Feature Section ----------------*/
+
+.dashboard-feature-section {
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.dashboard-feature-section-top h1 {
+  color: #74512D;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.dashboard-feature-section-bottom {
+  margin-left: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 60px ;
+}
 
 
+.dashboard-feature-section-info:hover {
+  transform: translateY(-10px);
+}
 
+.dashboard-feature-section-info h3 {
+  margin-right: 5rem ;
+  font-size: 1.2rem;
+  color: #74512D;
+}
+
+.dashboard-feature-section-info p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #AF8F6F;
+}
+
+.dashboard-feature-section-info svg {
+  font-size: 3rem;
+  color: #742d3b;
+  margin-bottom: 1rem;
+}

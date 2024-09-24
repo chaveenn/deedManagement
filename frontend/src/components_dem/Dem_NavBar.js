@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemText, IconButton, ListItemIcon } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle"; // Import profile icon
+//import SearchIcon from '@mui/icons-material/Search';
 
 function DeedNavbar() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -34,7 +35,7 @@ function DeedNavbar() {
     <>
       <nav className="home-navBar">
         <div className="logo-container">
-          <Link to="/" aria-label="Go to homepage"><p>AMS</p></Link>
+          <Link to="/home" aria-label="Go to homepage"><p>AMS</p></Link>
         </div>
 
         <div className="navbar-links-container">
@@ -81,6 +82,7 @@ function DeedNavbar() {
 
       {/* Sub-navbar */}
       <div className="subnav-container">
+        
         <Link to="/add_deed" className="subnav-link" aria-label="Add Deed">Add Deed</Link>
         <Link to="/read_all_deeds" className="subnav-link" aria-label="View Recent Deeds">View Recent</Link>
       </div>

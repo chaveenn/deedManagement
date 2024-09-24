@@ -13,7 +13,7 @@ import DemDashboard from './components_dem/Dem_Dashboard';
 import DemAddDeed from './components_dem/Dem_addDeed';
 import DemReadAll from './components_dem/Dem_allDeed';
 import DemDeedDetail from './components_dem/Dem_deedDetail';
-import DemEditDeed from './components_dem/Dem_editDeed'
+
 
 
 
@@ -22,6 +22,7 @@ function App() {
     <Router>
       <div>
         <Routes>
+        <Route path="/home" exact element={<Home/>}/> 
 
         <Route path="/" exact element={<DemDashboard/>}/> 
         <Route path="/login" exact element={<Login/>}/>

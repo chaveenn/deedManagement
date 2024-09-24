@@ -60,7 +60,7 @@ function DemDeedDetail() {
     try {
       await axios.put(`http://localhost:8070/deeds/update/${id}`, updatedDeed);
       setOpenDialog(false);
-      navigate(0); // Refresh the current page to get updated data
+      navigate(0); 
     } catch (error) {
       console.error("Error updating deed:", error);
     }
@@ -70,7 +70,7 @@ function DemDeedDetail() {
     if (window.confirm("Are you sure you want to delete this deed?")) {
       try {
         await axios.delete(`http://localhost:8070/deeds/delete/${id}`);
-        navigate("/read_all_deeds"); // Navigate back to all deeds after deletion
+        navigate("/read_all_deeds"); 
       } catch (error) {
         console.error("Error deleting deed:", error);
       }

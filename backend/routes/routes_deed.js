@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Deed = require("../models/model_dem_deed");
 const Client = require("../models/model_cm_client");
-const Lawyer = require("../models/model_atm_lawyer")
+const Lawyer = require("../models/model_atm_lawyer");
+const AppointmentRequest = require("../models/model_apm_appointment_request");
+const PaymentRequest = require("../models/model_fin_payment_request"); 
 
 
 // Search client with NIC --------------------------------------------------------------
@@ -171,6 +173,40 @@ router.route("/all_Lawyers").get(async (req, res) => {
         res.status(500).json({ message: "Error fetching lawyers", error: err.message });
     }
 });
+
+// Get counts for deeds, lawyers, clients, appointment requests, and payment requests
+router.get("/dashboard/counts", async (req, res) => {
+    try {
+        // Count deeds
+        const deedCount = await Deed.countDocuments();
+
+        // Count lawyers
+        const lawyerCount = await Lawyer.countDocuments();
+
+        // Count deed clients
+        const clientCount = await Client.countDocuments();
+
+        // Count appointment requests
+        const appointmentCount = await AppointmentRequest.countDocuments();
+
+        // Count payment requests
+        const paymentRequestCount = await PaymentRequest.countDocuments();
+
+        // Send the counts as a JSON response
+        res.status(200).json({
+            deedCount,
+            lawyerCount,
+            clientCount,
+            appointmentCount,
+            paymentRequestCount
+        });
+    } catch (error) {
+        console.error("Error fetching counts:", error.message);
+        res.status(500).json({ message: "Error fetching counts", error: error.message });
+    }
+});
+
+
 
 
 
