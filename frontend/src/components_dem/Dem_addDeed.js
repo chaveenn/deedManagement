@@ -14,7 +14,7 @@ export default function AddDeed() {
         considerationValue: "",
         grantorNic: "",
         granteeNic: "",
-        deedStatus: "Created" // Set deedStatus to "Created" by default
+        deedStatus: "Created"
     });
     const [loading, setLoading] = useState(false);
     const [lawyers, setLawyers] = useState([]);
@@ -94,11 +94,11 @@ export default function AddDeed() {
                 return;
             }
 
-            // Send the form data to the server
+            
             const response = await axios.post("http://localhost:8070/deeds/add", formData);
-            window.alert(response.data.message); // Alert success message
-
-            // Reset form data and keep deedStatus as "Created"
+            window.alert(response.data.message); 
+            
+            
             setFormData({
                 assignedLawyer: "",
                 deedType: "",
@@ -112,7 +112,8 @@ export default function AddDeed() {
                 deedStatus: "Created"
             });
         } catch (err) {
-            // Display server error messages as alerts
+            
+            
             window.alert("Error: " + (err.response?.data?.message || err.message));
         } finally {
             setLoading(false);

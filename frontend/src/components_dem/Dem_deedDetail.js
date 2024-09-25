@@ -122,10 +122,22 @@ function DemDeedDetail() {
         <Button onClick={handleDelete} style={{ marginLeft: '10px' }}>Delete</Button>
       </div>
 
-      {/* Dialog for Editing Specific Deed Fields */}
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>Edit Deed Details</DialogTitle>
-        <DialogContent>
+      
+      <Dialog open={openDialog} onClose={handleCloseDialog}
+      sx={{ 
+        '& .MuiDialog-paper': { 
+        backgroundColor: '#f5f5f5', 
+        width: '400px', 
+        maxWidth: '100%', 
+        }
+        }}>
+        <DialogTitle
+        sx={{ 
+          backgroundColor: '#74512D', 
+          color: 'white' 
+          }}
+        >Edit Deed Details</DialogTitle>
+        <DialogContent><br/>
           <TextField
             autoFocus
             margin="dense"
@@ -159,10 +171,24 @@ function DemDeedDetail() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
+          <Button onClick={handleCloseDialog} 
+          sx={{
+            backgroundColor: '#74512D', 
+            color: 'white',
+            '&:hover': {
+                backgroundColor: '#5a3d23' 
+            }
+        }}>
             Cancel
           </Button>
-          <Button onClick={handleUpdateSubmit} color="primary">
+          <Button onClick={handleUpdateSubmit} 
+          sx={{
+            backgroundColor: '#74512D', 
+            color: 'white',
+            '&:hover': {
+                backgroundColor: '#5a3d23' 
+            }
+        }}>
             Update
           </Button>
         </DialogActions>

@@ -4,11 +4,11 @@ import Footer from "./Dem_Footer";
 import axios from "axios";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogActions, DialogContent, DialogTitle, Select, MenuItem } from "@mui/material";
 
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance'; // All Deeds
-import GroupIcon from '@mui/icons-material/Group'; // All Lawyers
-import PersonIcon from '@mui/icons-material/Person'; // All Clients
-import ScheduleIcon from '@mui/icons-material/Schedule'; // Appointment Requests
-import PaymentIcon from '@mui/icons-material/Payment'; // Payment Requests
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance'; 
+import GroupIcon from '@mui/icons-material/Group'; 
+import PersonIcon from '@mui/icons-material/Person';
+import ScheduleIcon from '@mui/icons-material/Schedule'; 
+import PaymentIcon from '@mui/icons-material/Payment'; 
 import './deed_management.css';
 
 const featureInfoData = [
@@ -41,9 +41,9 @@ const featureInfoData = [
 
 export default function DeedDashboard() {
     const [deedCounts, setDeedCounts] = useState({
-        allDeeds: 0,
-        allLawyers: 0,
-        allClients: 0,
+        allDeeds: 3,
+        allLawyers: 10,
+        allClients: 3,
         appointmentRequests: 0,
         paymentRequests: 0,
     });
@@ -88,7 +88,7 @@ export default function DeedDashboard() {
     const handleStatusChange = async () => {
         try {
             await axios.put(`http://localhost:8070/deeds/updateStatus/${selectedDeed._id}`, { deedStatus: newStatus });
-            fetchNonRegisteredDeeds(); // Refresh the deed list after status update
+            fetchNonRegisteredDeeds(); 
             handleCloseDialog();
         } catch (error) {
             console.error("Error updating deed status:", error);
@@ -98,23 +98,23 @@ export default function DeedDashboard() {
     return (
         <div>
             <NavBar />
-            {/*}
             <div className="dashboard-feature-section">
-            <p className="apm-user-welcome">Hello @User</p>
-
-                <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
-                    {featureInfoData.map((feature) => (
-                        <div key={feature.title} style={{ textAlign: "center", margin: "20px" }}>
-                            <div style={{ fontSize: "48px", marginBottom: "10px" }}>{feature.icon}</div>
-                            <h3>{feature.title}</h3>
-                            <p>{deedCounts[feature.countKey]}</p>
-                        </div>
-                    ))}
-                </div>
+            <div className="dashboard-feature-section-top">
+                <h1>Deed Management Dashboard</h1>
             </div>
-            /*}
+            <div className="dashboard-feature-section-bottom">
+                {featureInfoData.map((feature, index) => (
+                    <div key={index} className="dashboard-feature-section-info">
+                        {feature.icon}
+                        <h3>{feature.title}</h3>
+                        <p>{deedCounts[feature.countKey]}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
 
-            {/* Table to display deeds that are not registered */}
+
+            {/* table - not registered deed*/}
             <div className="dem-table-container">
                 <h3>Current Deeds</h3><br/>
                 <TableContainer component={Paper}>
@@ -137,8 +137,18 @@ export default function DeedDashboard() {
                                     <TableCell align="left" className="dem-table-summary-data">{`${deed.grantor.fname} ${deed.grantor.lname}`}</TableCell>
                                     <TableCell align="left" className="dem-table-summary-data">{`${deed.grantee.fname} ${deed.grantee.lname}`}</TableCell>
                                     <TableCell align="left" className="dem-table-summary-data">{deed.deedStatus}</TableCell>
-                                    <TableCell align="center" className="dem-table-summary-action">
-                                        <Button onClick={() => handleOpenDialog(deed)}>Change Status</Button>
+                                    
+                                    <TableCell align="center" className=""dem-table-summary-action>
+                                        <Button onClick={() => handleOpenDialog(deed)}
+                                            sx={{
+                                                margin : 'auto',
+                                                color : '#333',
+                                                backgroundColor: '#AF8F6F', 
+                                                '&:hover': { backgroundColor: '#74512D',
+                                               }
+                                            }}
+                                          >
+                                             Change Status</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -149,24 +159,24 @@ export default function DeedDashboard() {
             </div>
 
             <Dialog 
-  open={openDialog} 
-  onClose={handleCloseDialog} 
-  sx={{ 
-    '& .MuiDialog-paper': { 
-      backgroundColor: '#f5f5f5', // Light background for the dialog
-      width: '400px', // Control width
-      maxWidth: '100%', 
-    }
-  }}
->
-    <DialogTitle 
-      sx={{ 
-        backgroundColor: '#74512D', // Your theme dark color for title background
-        color: 'white' 
-      }}
-    >
-        Change Deed Status
-    </DialogTitle>
+                open={openDialog} 
+                onClose={handleCloseDialog} 
+                sx={{ 
+                    '& .MuiDialog-paper': { 
+                    backgroundColor: '#f5f5f5', 
+                    width: '400px', 
+                    maxWidth: '100%', 
+                    }
+                }}
+            >
+            <DialogTitle 
+            sx={{ 
+                backgroundColor: '#74512D', 
+                color: 'white' 
+                }}
+                >
+                Change Deed Status
+                </DialogTitle>
     
     <DialogContent>
         <br/>
@@ -175,17 +185,17 @@ export default function DeedDashboard() {
             onChange={(e) => setNewStatus(e.target.value)}
             fullWidth
             sx={{
-                backgroundColor: 'white', // White for select background
-                color: '#000', // Black text
+                backgroundColor: 'white', 
+                color: '#000', 
                 '&:hover': {
-                    backgroundColor: '#e0e0e0', // Light gray on hover
+                backgroundColor: '#e0e0e0', 
                 }
             }}
         >
             <MenuItem value="Approved">Approved</MenuItem>
             <MenuItem value="Rejected">Rejected</MenuItem>
             <MenuItem value="Registered">Registered</MenuItem>
-            <MenuItem value="Completed">Completed</MenuItem>
+            <MenuItem value="Completed">Created</MenuItem>
         </Select>
     </DialogContent>
     
@@ -193,10 +203,10 @@ export default function DeedDashboard() {
         <Button 
           onClick={handleCloseDialog} 
           sx={{
-              backgroundColor: '#74512D', // Theme dark button color
+              backgroundColor: '#74512D', 
               color: 'white',
               '&:hover': {
-                  backgroundColor: '#5a3d23' // Slightly darker hover
+                  backgroundColor: '#5a3d23' 
               }
           }}
         >
@@ -206,7 +216,7 @@ export default function DeedDashboard() {
         <Button 
           onClick={handleStatusChange} 
           sx={{
-              backgroundColor: '#5a3d23', // Theme button color
+              backgroundColor: '#5a3d23', 
               color: 'white',
               '&:hover': {
                   backgroundColor: '#74512D'

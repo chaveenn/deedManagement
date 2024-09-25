@@ -174,7 +174,7 @@ router.route("/all_Lawyers").get(async (req, res) => {
     }
 });
 
-/*For later
+
 // Get counts for deeds, lawyers, clients, appointment requests, and payment requests
 router.get("/dashboard/counts", async (req, res) => {
     try {
@@ -206,7 +206,7 @@ router.get("/dashboard/counts", async (req, res) => {
         res.status(500).json({ message: "Error fetching counts", error: error.message });
     }
 });
-*/
+
 
 
 // Get all deeds with status not equal to 'Registered'

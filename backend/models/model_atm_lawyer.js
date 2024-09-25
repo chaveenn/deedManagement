@@ -21,20 +21,20 @@ const lawyerSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true, // Ensure unique email addresses
-        match: /.+\@.+\..+/ // Basic email format validation
+        unique: true, 
+        match: /.+\@.+\..+/
     },
     
     userType: {
         type: String,
         required: true,
-        enum: ['Lawyer'] // Ensure the userType is 'Lawyer'
+        enum: ['Lawyer'] 
     },
 
     phoneNumber: {
         type: String,
         required: true,
-        unique: true // Ensure unique phone numbers
+        unique: true 
     },
 
     education: {
@@ -44,15 +44,15 @@ const lawyerSchema = new Schema({
 
     temporaryPassword: {
         type: String,
-        required: false // Make this optional if not needed
+        required: false 
     },
 
     profilePicture: {
-        type: String, // URL or path to the profile picture
-        required: false // Make this optional
+        type: String, 
+        required: false
     }
 }, {
-    timestamps: true // Automatically manage createdAt and updatedAt fields
+    timestamps: true 
 });
 
 const Lawyer = mongoose.model("Lawyer", lawyerSchema);

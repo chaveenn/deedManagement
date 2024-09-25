@@ -61,11 +61,11 @@ const deedSchema = new Schema({
     deedStatus: {
         type: String,
         required: true,
-        enum: ["Pending", "Approved", "Rejected","Created","Registered"], // Define possible statuses
+        enum: ["Pending", "Approved", "Rejected","Created","Registered"],
         default: "Created"
     }
 }, {
-    timestamps: true // Automatically manage createdAt and updatedAt fields
+    timestamps: true 
 });
 
 const Deed = mongoose.model("Deed", deedSchema);

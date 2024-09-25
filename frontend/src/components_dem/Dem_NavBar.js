@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemText, IconButton, ListItemIcon } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle"; // Import profile icon
-//import SearchIcon from '@mui/icons-material/Search';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+
 
 function DeedNavbar() {
   const [openMenu, setOpenMenu] = useState(false);
