@@ -54,6 +54,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: fit-content;
+    margin-bottom: 10px;
 }
 
 .dem-table-summary-action button:hover {
