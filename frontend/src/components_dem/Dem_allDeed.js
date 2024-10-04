@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
 import NavBar from "./Dem_NavBar.js";
 import Footer from "./Dem_Footer.js";
-import './deed_management.css';
+import './deed_all.css';
 
 function AllDeed() {
   const [deeds, setDeeds] = useState([]);

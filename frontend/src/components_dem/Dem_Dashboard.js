@@ -9,7 +9,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import ScheduleIcon from '@mui/icons-material/Schedule'; 
 import PaymentIcon from '@mui/icons-material/Payment'; 
-import './deed_management.css';
+import './deed_dashboard.css';
 
 const featureInfoData = [
     {
@@ -137,18 +137,9 @@ export default function DeedDashboard() {
                                     <TableCell align="left" className="dem-table-summary-data">{`${deed.grantor.fname} ${deed.grantor.lname}`}</TableCell>
                                     <TableCell align="left" className="dem-table-summary-data">{`${deed.grantee.fname} ${deed.grantee.lname}`}</TableCell>
                                     <TableCell align="left" className="dem-table-summary-data">{deed.deedStatus}</TableCell>
-                                    
-                                    <TableCell align="center" className=""dem-table-summary-action>
-                                        <Button onClick={() => handleOpenDialog(deed)}
-                                            sx={{
-                                                margin : 'auto',
-                                                color : '#333',
-                                                backgroundColor: '#AF8F6F', 
-                                                '&:hover': { backgroundColor: '#74512D',
-                                               }
-                                            }}
-                                          >
-                                             Change Status</Button>
+                                    <TableCell align="center" className="dem-table-summary-action">
+                                        <button onClick={() => handleOpenDialog(deed)}>
+                                        Change Status</button>
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -200,7 +191,7 @@ export default function DeedDashboard() {
     </DialogContent>
     
     <DialogActions>
-        <Button 
+        <button 
           onClick={handleCloseDialog} 
           sx={{
               backgroundColor: '#74512D', 
@@ -211,9 +202,9 @@ export default function DeedDashboard() {
           }}
         >
           Cancel
-        </Button>
+        </button>
         
-        <Button 
+        <button 
           onClick={handleStatusChange} 
           sx={{
               backgroundColor: '#5a3d23', 
@@ -224,7 +215,7 @@ export default function DeedDashboard() {
           }}
         >
           Update
-        </Button>
+        </button>
     </DialogActions>
 </Dialog>
 

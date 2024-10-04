@@ -1,0 +1,82 @@
+/* deed_management.css */
+
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Deed Detail Container */
+.deed-detail-container {
+    margin-bottom: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Section spacing */
+.section-spacing {
+    margin-bottom: 20px;
+}
+
+/* Strong text styles */
+strong {
+    color: #555;
+}
+
+
+
+/* Button styles */
+.MuiButton-root {
+    background-color: #74512D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.MuiButton-root:hover {
+    background-color: #5a3d23; /* Darker shade on hover */
+}
+
+/* Dialog styles */
+.MuiDialog-paper {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.MuiDialogTitle-root {
+    background-color: #74512D;
+    color: white;
+    padding: 16px;
+    text-align: center;
+}
+
+/* TextField styles */
+.MuiTextField-root {
+    margin-bottom: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .deed-detail-container {
+        padding: 10px; /* Smaller padding on mobile */
+    }
+
+    h2 {
+        font-size: 24px; /* Smaller heading on mobile */
+    }
+}

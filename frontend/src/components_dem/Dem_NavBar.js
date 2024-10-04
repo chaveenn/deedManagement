@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemText, IconButton, ListItemIcon } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-
+import './deed_management.css'
 
 function DeedNavbar() {
   const [openMenu, setOpenMenu] = useState(false);

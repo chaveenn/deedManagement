@@ -1,7 +1,6 @@
 import './components_home/common.css';
 import './components_home/home.css';
 import './components_login/login.css';
-import './components_dem/deed_management.css'
 
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
@@ -20,9 +19,6 @@ import DemDashboard from './components_dem/Dem_Dashboard';
 import DemAddDeed from './components_dem/Dem_addDeed';
 import DemReadAll from './components_dem/Dem_allDeed';
 import DemDeedDetail from './components_dem/Dem_deedDetail';
-
-
-
 
 function App() {
   return (

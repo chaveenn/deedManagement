@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "./Dem_NavBar.js";
 import Footer from "./Dem_Footer.js";
-
+import './deed_add.css';
 export default function AddDeed() {
     const [formData, setFormData] = useState({
         assignedLawyer: "",

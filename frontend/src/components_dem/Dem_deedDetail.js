@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
-import './deed_management.css';
+import './deed_details.css';
 import NavBar from "./Dem_NavBar.js";
 import Footer from "./Dem_Footer.js";
 
@@ -118,9 +118,11 @@ function DemDeedDetail() {
       </div>
 
       <div className="button-group">
-        <Button onClick={handleUpdateClick}>Update</Button>
-        <Button onClick={handleDelete} style={{ marginLeft: '10px' }}>Delete</Button>
+        <button onClick={handleUpdateClick}>Update</button><br/><br/>
+        <button onClick={handleDelete} >Delete</button>
       </div>
+
+                  
 
       
       <Dialog open={openDialog} onClose={handleCloseDialog}

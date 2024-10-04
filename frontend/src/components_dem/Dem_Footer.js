@@ -1,5 +1,5 @@
 import React from "react";
-
+import './deed_management.css'
 const Footer = () => {
   return (
     <div className="footer-wrapper">
