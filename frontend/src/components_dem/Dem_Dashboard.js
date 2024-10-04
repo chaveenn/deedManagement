@@ -121,22 +121,22 @@ export default function DeedDashboard() {
                     <Table>
                         <TableHead>
                             <TableRow className="dem-table-summary-row">
-                                <TableCell align="left" className="dem-table-summary-header">Deed Number</TableCell>
-                                <TableCell align="left" className="dem-table-summary-header">Assigned Lawyer</TableCell>
-                                <TableCell align="left" className="dem-table-summary-header">Grantor</TableCell>
-                                <TableCell align="left" className="dem-table-summary-header">Grantee</TableCell>
-                                <TableCell align="left" className="dem-table-summary-header">Deed Status</TableCell>
-                                <TableCell align="center" className="dem-table-summary-header">Actions</TableCell>
+                                <TableCell align="left" className="dem-table-summary-header"><p>Deed Number</p></TableCell>
+                                <TableCell align="left" className="dem-table-summary-header"><p>Assigned Lawyer</p></TableCell>
+                                <TableCell align="left" className="dem-table-summary-header"><p>Grantor</p></TableCell>
+                                <TableCell align="left" className="dem-table-summary-header"><p>Grantee</p></TableCell>
+                                <TableCell align="left" className="dem-table-summary-header"><p>Deed Status</p></TableCell>
+                                <TableCell align="center" className="dem-table-summary-header"><p>Actions</p></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {nonRegisteredDeeds.map((deed) => (
                                 <TableRow key={deed._id} className="dem-table-summary-row">
-                                    <TableCell align="left" className="dem-table-summary-data">{deed.deedNo}</TableCell>
-                                    <TableCell align="left" className="dem-table-summary-data">{`${deed.assignedLawyer.firstName} ${deed.assignedLawyer.lastName}`}</TableCell>
-                                    <TableCell align="left" className="dem-table-summary-data">{`${deed.grantor.fname} ${deed.grantor.lname}`}</TableCell>
-                                    <TableCell align="left" className="dem-table-summary-data">{`${deed.grantee.fname} ${deed.grantee.lname}`}</TableCell>
-                                    <TableCell align="left" className="dem-table-summary-data">{deed.deedStatus}</TableCell>
+                                    <TableCell align="left" className="dem-table-summary-data"><p>{deed.deedNo}</p></TableCell>
+                                    <TableCell align="left" className="dem-table-summary-data"><p>{`${deed.assignedLawyer.firstName} ${deed.assignedLawyer.lastName}`}</p></TableCell>
+                                    <TableCell align="left" className="dem-table-summary-data"><p>{`${deed.grantor.fname} ${deed.grantor.lname}`}</p></TableCell>
+                                    <TableCell align="left" className="dem-table-summary-data"><p>{`${deed.grantee.fname} ${deed.grantee.lname}`}</p></TableCell>
+                                    <TableCell align="left" className="dem-table-summary-data"><p>{deed.deedStatus}</p></TableCell>
                                     <TableCell align="center" className="dem-table-summary-action">
                                         <button onClick={() => handleOpenDialog(deed)}>
                                         Change Status</button>
