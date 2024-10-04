@@ -173,7 +173,7 @@ function DemDeedDetail() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDialog} 
+          <button onClick={handleCloseDialog} 
           sx={{
             backgroundColor: '#74512D', 
             color: 'white',
@@ -182,8 +182,8 @@ function DemDeedDetail() {
             }
         }}>
             Cancel
-          </Button>
-          <Button onClick={handleUpdateSubmit} 
+          </button>
+          <button onClick={handleUpdateSubmit} 
           sx={{
             backgroundColor: '#74512D', 
             color: 'white',
@@ -192,7 +192,7 @@ function DemDeedDetail() {
             }
         }}>
             Update
-          </Button>
+          </button>
         </DialogActions>
       </Dialog>
       
