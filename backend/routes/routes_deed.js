@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Deed = require("../models/model_dem_deed");
-const Client = require("../models/client");//change according to enith's file name for client model
-const Lawyer = require("../models/model_atm_lawyer");////change according to shehara's file name for lawyer model
+const Client = require("../models/client");
+const Lawyer = require("../models/model_atm_lawyer");
 const AppointmentRequest = require("../models/model_apm_appointment_request");
 //const PaymentRequest = require("../models/model_fin_payment_request"); //change according to charitha's file name for payment model
 
@@ -39,7 +39,7 @@ router.post("/add", async (req, res) => {
         }
 
         // Count deeds by assigned lawyer
-        const deedCount = await Deed.countDocuments({ assignedLawyer });
+        const deedCount = await  Deed.countDocuments()
 
         // Calculate deed number
         const deedNo = deedCount + 1;

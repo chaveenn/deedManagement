@@ -59,7 +59,7 @@ function AllDeed() {
           <Table aria-label="Deeds Table" className="dem-table-summary">
             <TableHead>
               <TableRow className="dem-table-summary-row">
-                <TableCell align="left" className="dem-table-summary-header"><p>Deed ID</p></TableCell>
+                <TableCell align="left" className="dem-table-summary-header"><p>Deed No</p></TableCell>
                 <TableCell align="left" className="dem-table-summary-header"><p>Lawyer Name</p></TableCell>
                 <TableCell align="left" className="dem-table-summary-header"><p>Deed Type</p></TableCell>
                 <TableCell align="left" className="dem-table-summary-header"><p>Grantor</p></TableCell>
@@ -71,7 +71,7 @@ function AllDeed() {
             <TableBody>
               {deeds.map((deed) => (
                 <TableRow key={deed._id} className="dem-table-summary-row">
-                  <TableCell align="left" className="dem-table-summary-data"><p>{deed._id}</p></TableCell>
+                  <TableCell align="left" className="dem-table-summary-data"><p>{deed.deedNo}</p></TableCell>
                   <TableCell align="left" className="dem-table-summary-data"><p>{getLawyerNameById(deed.assignedLawyer)}</p></TableCell>
                   <TableCell align="left" className="dem-table-summary-data"><p>{deed.deedType}</p></TableCell>
                   <TableCell align="left" className="dem-table-summary-data"><p>{deed.grantor ? `${deed.grantor.fname} ${deed.grantor.lname}` : "No Grantor"}</p></TableCell>
