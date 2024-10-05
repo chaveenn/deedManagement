@@ -94,7 +94,7 @@
 
 .subnav-link {
   margin-left: 20px;
-  color: var(--secondary-color);
+  color: #74512D;
   text-decoration: none;
   font-size: 1.1rem; 
   font-weight: 600; 
@@ -103,7 +103,7 @@
 
 
 .subnav-link:hover {
-  color: #74512D; 
+  color: var(--secondary-color); 
 }
 
 
