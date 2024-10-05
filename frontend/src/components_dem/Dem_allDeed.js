@@ -79,7 +79,7 @@ function AllDeed() {
                   <TableCell align="left" className="dem-table-summary-data"><p>{deed.title}</p></TableCell>
                   <TableCell align="center" className="dem-table-summary-action">
                     <button onClick={() => handleView(deed._id)}>View</button>
-                    <button onClick={() => handleDelete(deed._id)} style={{ marginLeft: '10px' }}>Delete</button>
+                    <button onClick={() => handleDelete(deed._id)} >Delete</button>
                   </TableCell>
                 </TableRow>
               ))}

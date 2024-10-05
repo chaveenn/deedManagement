@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle} from '@mui/material';
 import './deed_details.css';
 import NavBar from "./Dem_NavBar.js";
 import Footer from "./Dem_Footer.js";
+import { PDFDocument, rgb } from 'pdf-lib';
+
 
 function DemDeedDetail() {
   const { id } = useParams();
@@ -79,125 +81,189 @@ function DemDeedDetail() {
     }
   };
 
+  const generatePDF = async () => {
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([600, 750]);
+  
+    // Add title centered
+    const titleFontSize = 24;
+    const titleX = (page.getWidth() - titleFontSize * 8) / 2;
+    page.drawText(`Deed Details`, { x: titleX, y: 700, size: titleFontSize, color: rgb(0, 0, 0) });
+  
+    // Formatting Deed Information with bold labels
+    const fontSize = 12;
+    let yPosition = 660; // Start Y position for content
+  
+    const addSection = (title, content) => {
+      page.drawText(title, { x: 50, y: yPosition, size: fontSize, color: rgb(0, 0, 0) });
+      // Convert content to string to avoid errors
+      page.drawText(String(content), { x: 200, y: yPosition, size: fontSize, color: rgb(0, 0, 0) });
+      yPosition -= 20; // Decrease Y position for the next line
+    };
+  
+    // Deed ID and other details
+    addSection("Deed ID:", deed._id);
+    addSection("Lawyer:", lawyers.find(lawyer => lawyer._id === deed.assignedLawyer)?.firstName || "No Lawyer");
+    addSection("Deed Type:", deed.deedType);
+    addSection("Title:", deed.title);
+    addSection("Consideration Value:", deed.considerationValue);
+  
+    yPosition -= 20; // Extra space before Grantor and Grantee sections
+  
+    // Grantor details
+    addSection("Grantor:", deed.grantor ? `${deed.grantor.fname} ${deed.grantor.lname}` : "No Grantor");
+    addSection("Grantor Phone:", deed.grantor ? deed.grantor.phone : "N/A");
+    addSection("Grantor NIC:", deed.grantor ? deed.grantor.nic : "N/A");
+    addSection("Grantor Address:", deed.grantor ? deed.grantor.address : "N/A");
+  
+    yPosition -= 20; // Extra space before Grantee details
+  
+    // Grantee details
+    addSection("Grantee:", deed.grantee ? `${deed.grantee.fname} ${deed.grantee.lname}` : "No Grantee");
+    addSection("Grantee Phone:", deed.grantee ? deed.grantee.phone : "N/A");
+    addSection("Grantee NIC:", deed.grantee ? deed.grantee.nic : "N/A");
+    addSection("Grantee Address:", deed.grantee ? deed.grantee.address : "N/A");
+  
+    yPosition -= 20; // Extra space before Fee details
+  
+    // Fees
+    addSection("Lawyer Fee:", deed.lawyerFee);
+    addSection("Tax Fee:", deed.taxFee);
+    addSection("Total Fee:", deed.totalFee);
+  
+    // Save the document
+    const pdfBytes = await pdfDoc.save();
+  
+    // Trigger download
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `deed_${deed._id}.pdf`;
+    link.click();
+  };
+  
+  
+
   if (!deed) return <p>Loading...</p>;
 
   return (
     <div>
       <NavBar/>
-    <div className="deed-detail-container">
+      <div className="deed-detail-container">
+      <div>
+
+        <h2>Deed Details</h2><br/>
+        <p><strong>Deed ID:</strong> {deed._id}</p>
+
+        <div className="section-spacing">
+          <p><strong>Lawyer:</strong> {getLawyerNameById(deed.assignedLawyer)}</p>
+          <p><strong>Deed Type:</strong> {deed.deedType}</p>
+          <p><strong>Title:</strong> {deed.title}</p>
+          <p><strong>Consideration Value:</strong> {deed.considerationValue}</p>
+        </div>
+
+        <div className="section-spacing">
+          <p><strong>Grantor:</strong> {deed.grantor ? `${deed.grantor.fname} ${deed.grantor.lname}` : "No Grantor"}</p>
+          <p><strong>Grantor Phone:</strong> {deed.grantor ? deed.grantor.phone : "N/A"}</p>
+          <p><strong>Grantor NIC:</strong> {deed.grantor ? deed.grantor.nic : "N/A"}</p>
+          <p><strong>Grantor Address:</strong> {deed.grantor ? deed.grantor.address : "N/A"}</p>
+        </div>
+
+        <div className="section-spacing">
+          <p><strong>Grantee:</strong> {deed.grantee ? `${deed.grantee.fname} ${deed.grantee.lname}` : "No Grantee"}</p>
+          <p><strong>Grantee Phone:</strong> {deed.grantee ? deed.grantee.phone : "N/A"}</p>
+          <p><strong>Grantee NIC:</strong> {deed.grantee ? deed.grantee.nic : "N/A"}</p>
+          <p><strong>Grantee Address:</strong> {deed.grantee ? deed.grantee.address : "N/A"}</p>
+        </div>
+
+        <div className="section-spacing">
+          <p><strong>Lawyer Fee:</strong> {deed.lawyerFee}</p>
+          <p><strong>Tax Fee:</strong> {deed.taxFee}</p>
+          <p><strong>Total Fee:</strong> {deed.totalFee}</p>
+        </div>
+
       
-      <h2>Deed Details</h2><br/>
-
-      <p><strong>Deed ID:</strong> {deed._id}</p>
-
-      <div className="section-spacing">
-        <p><strong>Lawyer:</strong> {getLawyerNameById(deed.assignedLawyer)}</p>
-        <p><strong>Deed Type:</strong> {deed.deedType}</p>
-        <p><strong>Title:</strong> {deed.title}</p>
-        <p><strong>Consideration Value:</strong> {deed.considerationValue}</p>
       </div>
-
-      <div className="section-spacing">
-        <p><strong>Grantor:</strong> {deed.grantor ? `${deed.grantor.fname} ${deed.grantor.lname}` : "No Grantor"}</p>
-        <p><strong>Grantor Phone:</strong> {deed.grantor ? deed.grantor.phone : "N/A"}</p>
-        <p><strong>Grantor NIC:</strong> {deed.grantor ? deed.grantor.nic : "N/A"}</p>
-        <p><strong>Grantor Address:</strong> {deed.grantor ? deed.grantor.address : "N/A"}</p>
-      </div>
-
-      <div className="section-spacing">
-        <p><strong>Grantee:</strong> {deed.grantee ? `${deed.grantee.fname} ${deed.grantee.lname}` : "No Grantee"}</p>
-        <p><strong>Grantee Phone:</strong> {deed.grantee ? deed.grantee.phone : "N/A"}</p>
-        <p><strong>Grantee NIC:</strong> {deed.grantee ? deed.grantee.nic : "N/A"}</p>
-        <p><strong>Grantee Address:</strong> {deed.grantee ? deed.grantee.address : "N/A"}</p>
-      </div>
-
-      <div className="section-spacing">
-        <p><strong>Lawyer Fee:</strong> {deed.lawyerFee}</p>
-        <p><strong>Tax Fee:</strong> {deed.taxFee}</p>
-        <p><strong>Total Fee:</strong> {deed.totalFee}</p>
-      </div>
-
-      <div className="button-group">
-        <button onClick={handleUpdateClick}>Update</button><br/><br/>
-        <button onClick={handleDelete} >Delete</button>
-      </div>
-
+        <div className="button-group">
+          <button onClick={handleUpdateClick}>Update</button><br/><br/>
+          <button onClick={handleDelete} >Delete</button><br/><br/>
+          <button onClick={generatePDF}>Download Deed Details</button>
+        </div>
                   
-
-      
-      <Dialog open={openDialog} onClose={handleCloseDialog}
-      sx={{ 
-        '& .MuiDialog-paper': { 
-        backgroundColor: '#f5f5f5', 
-        width: '400px', 
-        maxWidth: '100%', 
-        }
-        }}>
-        <DialogTitle
+       
+        <Dialog open={openDialog} onClose={handleCloseDialog}
         sx={{ 
-          backgroundColor: '#74512D', 
-          color: 'white' 
-          }}
-        >Edit Deed Details</DialogTitle>
-        <DialogContent><br/>
-          <TextField
-            autoFocus
-            margin="dense"
-            name="deedType"
-            label="Deed Type"
-            type="text"
-            fullWidth
-            variant="outlined"
-            value={updatedDeed.deedType}
-            onChange={handleUpdateChange}
-          />
-          <TextField
-            margin="dense"
-            name="title"
-            label="Title"
-            type="text"
-            fullWidth
-            variant="outlined"
-            value={updatedDeed.title}
-            onChange={handleUpdateChange}
-          />
-          <TextField
-            margin="dense"
-            name="considerationValue"
-            label="Consideration Value"
-            type="number"
-            fullWidth
-            variant="outlined"
-            value={updatedDeed.considerationValue}
-            onChange={handleUpdateChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <button onClick={handleCloseDialog} 
-          sx={{
+          '& .MuiDialog-paper': { 
+          backgroundColor: '#f5f5f5', 
+          width: '400px', 
+          maxWidth: '100%', 
+          }
+          }}>
+          <DialogTitle
+          sx={{ 
             backgroundColor: '#74512D', 
-            color: 'white',
-            '&:hover': {
-                backgroundColor: '#5a3d23' 
-            }
-        }}>
-            Cancel
-          </button>
-          <button onClick={handleUpdateSubmit} 
-          sx={{
-            backgroundColor: '#74512D', 
-            color: 'white',
-            '&:hover': {
-                backgroundColor: '#5a3d23' 
-            }
-        }}>
-            Update
-          </button>
-        </DialogActions>
-      </Dialog>
-      
-    </div>
-    <Footer/>
+            color: 'white' 
+            }}
+          >Edit Deed Details</DialogTitle>
+
+          <DialogContent><br/>
+          <select 
+            id="deedType" 
+            name="deedType" 
+            onChange={handleUpdateChange}
+            placeholder="Nature of the deed">
+                        <option value="" disabled>Select a deed type</option>
+                        <option value="Deed of Transfer (Sale Deed)">Deed of Transfer (Sale Deed)</option>
+                        <option value="Deed of Gift">Deed of Gift</option>
+                        <option value="Deed of Lease">Deed of Lease</option>
+                        <option value="Deed of Mortgage">Deed of Mortgage</option>
+                        <option value="Power of Attorney (POA)">Power of Attorney (POA)</option>
+                        <option value="Deed of Partition">Deed of Partition</option>
+                        <option value="Deed of Agreement">Deed of Agreement</option>
+                        <option value="Deed of Declaration">Deed of Declaration</option>
+                        <option value="Deed of Exchange">Deed of Exchange</option>
+                    </select>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        name="title" 
+                        onChange={handleUpdateChange}
+                        placeholder="Name of the property"                        
+                    />
+                    <input 
+                        type="number" 
+                        id="considerationValue" 
+                        name="considerationValue"
+                        placeholder="Value of the property"
+                        onChange={handleUpdateChange}  
+                    />
+          </DialogContent>
+
+          <DialogActions>
+            <button onClick={handleCloseDialog} 
+            sx={{
+              backgroundColor: '#74512D', 
+              color: 'white',
+              '&:hover': {
+                  backgroundColor: '#5a3d23' 
+              }
+          }}>
+              Cancel
+            </button>
+            <button onClick={handleUpdateSubmit} 
+            sx={{
+              backgroundColor: '#74512D', 
+              color: 'white',
+              '&:hover': {
+                  backgroundColor: '#5a3d23' 
+              }
+          }}>Update</button>
+
+          </DialogActions>
+        </Dialog>
+        
+      </div>
+      <Footer/>
     </div>
   );
 }

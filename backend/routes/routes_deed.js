@@ -54,7 +54,7 @@ router.post("/add", async (req, res) => {
             title,
             district,
             division,
-            considerationValue,
+            considerationValue: parseFloat(considerationValue).toFixed(2),
             grantor: grantor._id,
             grantee: grantee._id,
             deedNo,
@@ -81,8 +81,12 @@ function calculateFees(deedType, value) {
         taxFee = value <= 100000 ? value * 0.03 : (100000 * 0.03) + ((value - 100000) * 0.04);
     }
 
-    const totalFee = lawyerFee + taxFee;
-    return { lawyerFee, taxFee, totalFee };
+    const totalFee = lawyerFee + taxFee;     
+    return {
+        lawyerFee: parseFloat(lawyerFee.toFixed(2)),
+        taxFee: parseFloat(taxFee.toFixed(2)),
+        totalFee: parseFloat(totalFee.toFixed(2))
+    };
 }
 
 // Read (Fetch all deeds) --------------------------------------------------------------
@@ -106,10 +110,14 @@ router.route("/update/:id").put(async (req, res) => {
         considerationValue, grantorName, grantorNIC, granteeName, granteeNIC
     } = req.body;
 
+    const { lawyerFee, taxFee, totalFee } = calculateFees(deedType, considerationValue);
     const updateDeed = {
         assignedLawyer, deedType, preRegisteredNo, title, district, division,
-        considerationValue, grantorName, grantorNIC, granteeName, granteeNIC
+        considerationValue: parseFloat(considerationValue).toFixed(2), grantorName, grantorNIC, 
+        granteeName, granteeNIC,lawyerFee, taxFee, totalFee
     };
+
+
 
     try {
         const updatedDeed = await Deed.findByIdAndUpdate(deedID, updateDeed, { new: true });
@@ -176,7 +184,7 @@ router.route("/all_Lawyers").get(async (req, res) => {
 
 
 // Get counts for deeds, lawyers, clients, appointment requests, and payment requests
-router.get("/dashboard/counts", async (req, res) => {
+router.get("/counts", async (req, res) => {
     try {
         // Count deeds
         const deedCount = await Deed.countDocuments();
@@ -187,11 +195,11 @@ router.get("/dashboard/counts", async (req, res) => {
         // Count deed clients
         const clientCount = await Client.countDocuments();
 
-        // Count appointment requests
+        //Count appointment requests
         const appointmentCount = await AppointmentRequest.countDocuments();
 
         // Count payment requests
-        const paymentRequestCount = await PaymentRequest.countDocuments();
+        //const paymentRequestCount = await PaymentRequest.countDocuments();
 
         // Send the counts as a JSON response
         res.status(200).json({
@@ -199,7 +207,7 @@ router.get("/dashboard/counts", async (req, res) => {
             lawyerCount,
             clientCount,
             appointmentCount,
-            paymentRequestCount
+            //paymentRequestCount
         });
     } catch (error) {
         console.error("Error fetching counts:", error.message);
@@ -242,6 +250,9 @@ router.put("/updateStatus/:id", async (req, res) => {
         res.status(500).json({ message: "Error updating deed status", error });
     }
 });
+
+
+
 
 module.exports = router;
 

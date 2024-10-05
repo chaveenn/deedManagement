@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "./Dem_NavBar";
 import Footer from "./Dem_Footer";
 import axios from "axios";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Dialog, DialogActions, DialogContent, DialogTitle, Select, MenuItem } from "@mui/material";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Dialog, DialogActions, DialogContent, DialogTitle, Select, MenuItem } from "@mui/material";
 
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance'; 
 import GroupIcon from '@mui/icons-material/Group'; 
@@ -41,9 +41,9 @@ const featureInfoData = [
 
 export default function DeedDashboard() {
     const [deedCounts, setDeedCounts] = useState({
-        allDeeds: 3,
-        allLawyers: 10,
-        allClients: 3,
+        allDeeds: 0,
+        allLawyers: 0,
+        allClients: 0,
         appointmentRequests: 0,
         paymentRequests: 0,
     });
@@ -59,12 +59,20 @@ export default function DeedDashboard() {
 
     const fetchCounts = async () => {
         try {
-            const response = await axios.get("http://localhost:8070/deeds/counts");
-            setDeedCounts(response.data);
+            const response = await axios.get("http://localhost:8070/deeds/counts"); 
+            console.log(response.data); 
+            setDeedCounts({
+                allDeeds: response.data.deedCount || 0,
+                allLawyers: response.data.lawyerCount || 0,
+                allClients: response.data.clientCount || 0,
+                appointmentRequests: response.data.appointmentCount || 0, 
+                paymentRequests: response.data.paymentRequestCount || 0 
+            });
         } catch (error) {
-            console.error("Error fetching counts:", error);
+            console.error("Error fetching counts:", error); 
         }
     };
+
 
     const fetchNonRegisteredDeeds = async () => {
         try {
