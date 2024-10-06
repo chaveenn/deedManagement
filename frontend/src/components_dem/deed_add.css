@@ -1,4 +1,4 @@
-/* deed_management.css */
+
 
 /* General styles */
 body {
@@ -8,76 +8,74 @@ body {
     background-color: #f9f9f9;
 }
 
-/* Container for Add Deed form */
 .container {
-    max-width: 600px; /* Set a max width for the form */
-    margin: 20px auto; /* Center the container */
-    padding: 20px; /* Add padding for inner spacing */
-    background-color: #fff; /* White background for the form */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 600px; 
+    margin: 20px auto; 
+    padding: 20px; 
+    background-color: #fff; 
+    border-radius: 8px; 
 }
 
-/* Headings */
-h2 {
-    text-align: center; /* Center align heading */
-    color: #74512D; /* Custom color for the heading */
+
+.dem-form-main-heading {
+    text-align: center; 
+    color: #36200a;
 }
 
-/* Form label styles */
+
 label {
-    display: block; /* Block display for labels */
-    margin-bottom: 5px; /* Space below labels */
-    font-weight: bold; /* Bold text for labels */
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold; 
 }
 
-/* Input and select styles */
+
 input, select {
-    width: 100%; /* Full width inputs */
-    padding: 10px; /* Padding inside inputs */
-    margin-bottom: 15px; /* Space below inputs */
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 16px; /* Font size for inputs */
-    box-sizing: border-box; /* Include padding and border in width */
-    transition: border-color 0.3s; /* Smooth border color transition */
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    box-sizing: border-box; 
+    transition: border-color 0.3s; 
 }
 
 input:focus, select:focus {
-    border-color: #74512D; /* Change border color on focus */
-    outline: none; /* Remove outline */
+    border-color: #74512D; 
+    outline: none; 
 }
 
 /* Button styles */
 button {
-    background-color: #74512D; /* Custom button color */
-    color: white; /* Text color */
-    padding: 10px; /* Padding inside the button */
-    border: none; /* Remove border */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Change cursor on hover */
-    font-size: 16px; /* Font size for button */
-    width: 100%; /* Full width button */
-    transition: background-color 0.3s; /* Smooth background color transition */
+    background-color: #74512D; 
+    color: white; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    width: 100%; 
+    transition: background-color 0.3s; 
 }
 
 button:hover {
-    background-color: #5a3d23; /* Darker color on hover */
+    background-color: #5a3d23; 
 }
 
-/* Loading state */
+
 button:disabled {
-    background-color: #ccc; /* Gray background when disabled */
-    cursor: not-allowed; /* Change cursor to indicate disabled state */
+    background-color: #ccc; 
+    cursor: not-allowed; 
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 600px) {
     .container {
-        padding: 15px; /* Smaller padding on mobile */
+        padding: 15px; 
     }
 
     h2 {
-        font-size: 24px; /* Smaller heading on mobile */
+        font-size: 24px; 
     }
 }

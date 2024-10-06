@@ -125,7 +125,7 @@ export default function AddDeed() {
             <NavBar />
             <br />
             <div className="container">
-                <h2 style={{ textAlign: "center", color: "#74512D" }}>Add a New Deed</h2>
+                <h2 class="dem-form-main-heading">Add a New Deed</h2>
                 <form onSubmit={handleSubmit}>
                     {/* Assigned Lawyer */}
                     <label htmlFor="assignedLawyer">Assigned Lawyer:</label>

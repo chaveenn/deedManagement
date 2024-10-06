@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Box, Drawer, List, ListItem, ListItemButton, ListItemText, IconButton, ListItemIcon } from "@mui/material";
+import { Box, Drawer, List, ListItem, ListItemButton, ListItemText, IconButton, ListItemIcon, InputBase } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SearchIcon from '@mui/icons-material/Search';
-import { InputBase } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import './deed_management.css'
+import './deed_management.css';
 
 function DeedNavbar() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -19,11 +18,10 @@ function DeedNavbar() {
     { text: "Payment", link: "/payment" },
     { text: "Client", link: "/client" },
     { text: "Appointment", link: "/apm_dashboard" },
-    { text: "Profile", link: "/profile", icon: <AccountCircle /> }, // Profile icon
+    { text: "Profile", link: "/profile", icon: <AccountCircle /> },
     { text: "Logout", link: "/logout" }
   ];
 
-  // Extracting menu rendering logic to a function for clarity
   const renderMenuOptions = () => (
     menuOptions.map((item) => (
       <ListItem key={item.text} disablePadding>
@@ -36,14 +34,20 @@ function DeedNavbar() {
   );
 
   const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
-      navigate(`/search/${searchQuery}`);  
+      navigate(`/search/${searchQuery}`);
     }
   };
+
   
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <>
@@ -96,15 +100,15 @@ function DeedNavbar() {
 
       {/* Sub-navbar */}
       <div className="subnav-container">
-
         {/* Search Bar with Icon */}
         <div className="search-container">
           <InputBase
-             placeholder="Search…"
-             inputProps={{ 'aria-label': 'search' }}
-             className="subnav-search"
-             value={searchQuery}
-             onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search deeds..."
+            inputProps={{ 'aria-label': 'search' }}
+            className="subnav-search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleKeyDown} // Add the onKeyDown event here
           />
           <SearchIcon className="search-icon" onClick={handleSearch} />
         </div>

@@ -253,38 +253,57 @@ router.put("/updateStatus/:id", async (req, res) => {
     }
 });
 
-// Search Deeds
+// Search Deeds by lawyer name, client name, and other fields
 router.get("/search/:query", async (req, res) => {
     const searchQuery = req.params.query;
 
     try {
+        // Step 1: Search for matching Lawyers
+        const lawyers = await Lawyer.find({
+            $or: [
+                { firstName: { $regex: searchQuery, $options: 'i' } },
+                { lastName: { $regex: searchQuery, $options: 'i' } }
+            ]
+        });
+
+        // Step 2: Search for matching Clients
+        const clients = await Client.find({
+            $or: [
+                { fname: { $regex: searchQuery, $options: 'i' } },
+                { lname: { $regex: searchQuery, $options: 'i' } }
+            ]
+        });
+
+        // Step 3: Extract the IDs of Lawyers and Clients
+        const lawyerIds = lawyers.map(lawyer => lawyer._id);
+        const clientIds = clients.map(client => client._id);
+
+        // Step 4: Search for Deeds that reference these Lawyer and Client IDs
         const deeds = await Deed.find({
             $or: [
-                { title: { $regex: searchQuery, $options: 'i' } },
+                { assignedLawyer: { $in: lawyerIds } },
+                { grantor: { $in: clientIds } },
+                { grantee: { $in: clientIds } },
+                { title: { $regex: searchQuery, $options: 'i' } },  
                 { deedType: { $regex: searchQuery, $options: 'i' } },
                 { preRegisteredNo: { $regex: searchQuery, $options: 'i' } },
                 { district: { $regex: searchQuery, $options: 'i' } },
                 { division: { $regex: searchQuery, $options: 'i' } },
-                { grantorNic: { $regex: searchQuery, $options: 'i' } }, // Search by Grantor's NIC
-                { granteeNic: { $regex: searchQuery, $options: 'i' } }, // Search by Grantee's NIC
-
-                { 'assignedLawyer.firstName': { $regex: searchQuery, $options: 'i' } }, // Search by Lawyer's First Name
-                { 'assignedLawyer.lastName': { $regex: searchQuery, $options: 'i' } }, // Search by Lawyer's Last Name
-                { 'grantor.fname': { $regex: searchQuery, $options: 'i' } }, // Search by Grantor's First Name
-                { 'grantor.lname': { $regex: searchQuery, $options: 'i' } }, // Search by Grantor's Last Name
-                { 'grantee.fname': { $regex: searchQuery, $options: 'i' } }, // Search by Grantee's First Name
-                { 'grantee.lname': { $regex: searchQuery, $options: 'i' } }  // Search by Grantee's Last Name
+                { grantorNic: { $regex: searchQuery, $options: 'i' } },
+                { granteeNic: { $regex: searchQuery, $options: 'i' } }
             ]
         })
-        .populate('grantor', 'fname lname') // Specify fields to populate from Grantor
-        .populate('grantee', 'fname lname') // Specify fields to populate from Grantee
-        .populate('assignedLawyer', 'firstName lastName'); // Specify fields to populate from Lawyer
+        .populate('grantor', 'fname lname')
+        .populate('grantee', 'fname lname')
+        .populate('assignedLawyer', 'firstName lastName');
 
+        // Step 5: Return the result or handle if no deeds found
         if (deeds.length === 0) {
             return res.status(404).json({ message: "No deeds found matching your query." });
         }
-        
+
         res.status(200).json(deeds);
+
     } catch (error) {
         res.status(500).json({ message: "Error searching deeds", error: error.message });
     }
