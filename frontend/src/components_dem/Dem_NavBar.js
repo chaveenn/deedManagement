@@ -100,7 +100,7 @@ function DeedNavbar() {
 
       {/* Sub-navbar */}
       <div className="subnav-container">
-        {/* Search Bar with Icon */}
+        
         <div className="search-container">
           <InputBase
             placeholder="Search deeds..."
@@ -108,13 +108,14 @@ function DeedNavbar() {
             className="subnav-search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleKeyDown} // Add the onKeyDown event here
+            onKeyDown={handleKeyDown} 
           />
           <SearchIcon className="search-icon" onClick={handleSearch} />
         </div>
-        
+        <div className="link-container">
         <Link to="/add_deed" className="subnav-link" aria-label="Add Deed">Add Deed</Link>
         <Link to="/read_all_deeds" className="subnav-link" aria-label="View Recent Deeds">View Recent</Link>
+        </div>
       </div>
     </>
   );

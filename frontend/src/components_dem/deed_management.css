@@ -86,11 +86,16 @@
 /*----------------- Subnavbar ----------------*/
 .subnav-container {
   display: flex;
-  justify-content: flex-start; /* Align items to the left */
+  justify-content: flex-start;
   align-items: center;
   padding: 8px 20px;
   background-color: #f1f1f1;
   margin-bottom: 10px;
+  position: -webkit-sticky; /* Safari support */
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensures it's above other elements */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for effect */
 }
 
 .subnav-link {
@@ -100,6 +105,10 @@
   font-size: 1.1rem;
   font-weight: 600;
   transition: color 0.3s ease;
+}
+
+.link-container{
+  margin-left: 0px;
 }
 
 /* Search bar container */
@@ -125,6 +134,7 @@
   color: #36200a;
   cursor: pointer;
 }
+
 
 /*----------------- Footer ----------------*/
 .footer-wrapper {
