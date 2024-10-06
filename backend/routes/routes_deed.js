@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Deed = require("../models/model_dem_deed");
-const Client = require("../models/client");
+const Client = require("../models/model_cli_client");
 const Lawyer = require("../models/model_atm_lawyer");
 const AppointmentRequest = require("../models/model_apm_appointment_request");
 //const PaymentRequest = require("../models/model_fin_payment_request"); //change according to charitha's file name for payment model
@@ -56,7 +56,9 @@ router.post("/add", async (req, res) => {
             division,
             considerationValue: parseFloat(considerationValue).toFixed(2),
             grantor: grantor._id,
+            grantorNic,
             grantee: grantee._id,
+            granteeNic,
             deedNo,
             lawyerFee,
             taxFee,
@@ -251,8 +253,44 @@ router.put("/updateStatus/:id", async (req, res) => {
     }
 });
 
+// Search Deeds
+router.get("/search/:query", async (req, res) => {
+    const searchQuery = req.params.query;
+
+    try {
+        const deeds = await Deed.find({
+            $or: [
+                { title: { $regex: searchQuery, $options: 'i' } },
+                { deedType: { $regex: searchQuery, $options: 'i' } },
+                { preRegisteredNo: { $regex: searchQuery, $options: 'i' } },
+                { district: { $regex: searchQuery, $options: 'i' } },
+                { division: { $regex: searchQuery, $options: 'i' } },
+                { grantorNic: { $regex: searchQuery, $options: 'i' } }, // Search by Grantor's NIC
+                { granteeNic: { $regex: searchQuery, $options: 'i' } }, // Search by Grantee's NIC
+
+                { 'assignedLawyer.firstName': { $regex: searchQuery, $options: 'i' } }, // Search by Lawyer's First Name
+                { 'assignedLawyer.lastName': { $regex: searchQuery, $options: 'i' } }, // Search by Lawyer's Last Name
+                { 'grantor.fname': { $regex: searchQuery, $options: 'i' } }, // Search by Grantor's First Name
+                { 'grantor.lname': { $regex: searchQuery, $options: 'i' } }, // Search by Grantor's Last Name
+                { 'grantee.fname': { $regex: searchQuery, $options: 'i' } }, // Search by Grantee's First Name
+                { 'grantee.lname': { $regex: searchQuery, $options: 'i' } }  // Search by Grantee's Last Name
+            ]
+        })
+        .populate('grantor', 'fname lname') // Specify fields to populate from Grantor
+        .populate('grantee', 'fname lname') // Specify fields to populate from Grantee
+        .populate('assignedLawyer', 'firstName lastName'); // Specify fields to populate from Lawyer
+
+        if (deeds.length === 0) {
+            return res.status(404).json({ message: "No deeds found matching your query." });
+        }
+        
+        res.status(200).json(deeds);
+    } catch (error) {
+        res.status(500).json({ message: "Error searching deeds", error: error.message });
+    }
+});
+
 
 
 
 module.exports = router;
-

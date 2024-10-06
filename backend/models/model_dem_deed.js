@@ -37,9 +37,17 @@ const deedSchema = new Schema({
         ref: "Client",
         required: true
     },
+    grantorNic :{
+        type: String,
+        required: true
+    },
     grantee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Client",
+        required: true
+    },
+    granteeNic :{
+        type: String,
         required: true
     },
     deedNo: {

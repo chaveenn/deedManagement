@@ -19,7 +19,7 @@ import DemDashboard from './components_dem/Dem_Dashboard';
 import DemAddDeed from './components_dem/Dem_addDeed';
 import DemReadAll from './components_dem/Dem_allDeed';
 import DemDeedDetail from './components_dem/Dem_deedDetail';
-
+import DemSearchResults from './components_dem/Dem_searchResult';
 function App() {
   return (
     <Router>
@@ -43,6 +43,8 @@ function App() {
         <Route path="/add_deed" exact element={<DemAddDeed/>}/>
         <Route path="/read_all_deeds" exact element={<DemReadAll/>}/>
         <Route path="/deed/:id" exact element={<DemDeedDetail />} />
+        <Route path="/search/:query" element={<DemSearchResults />} />
+
        
 
 
