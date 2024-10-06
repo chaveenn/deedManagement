@@ -86,26 +86,45 @@
 /*----------------- Subnavbar ----------------*/
 .subnav-container {
   display: flex;
-  justify-content: flex-end; 
-  padding: 10px 10%; 
-  background-color: #f1f1f1; 
+  justify-content: flex-start; /* Align items to the left */
+  align-items: center;
+  padding: 10px 10%;
+  background-color: #f1f1f1;
   margin-bottom: 10px;
 }
 
 .subnav-link {
-  margin-left: 20px;
+  margin-left: 40px;
   color: #74512D;
   text-decoration: none;
-  font-size: 1.1rem; 
-  font-weight: 600; 
+  font-size: 1.1rem;
+  font-weight: 600;
   transition: color 0.3s ease;
 }
 
-
-.subnav-link:hover {
-  color: #5a3d23; 
+/* Search bar container */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 350px;
 }
 
+.subnav-search {
+  padding: 5px 10px;
+  padding-left: 30px; 
+  margin-right: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 400px;
+}
+
+.search-icon {
+  left: 10px;
+  color: #74512D;
+  cursor: pointer;
+}
 
 /*----------------- Footer ----------------*/
 .footer-wrapper {

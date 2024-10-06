@@ -90,25 +90,25 @@ function DemDeedDetail() {
     const titleX = (page.getWidth() - titleFontSize * 8) / 2;
     page.drawText(`Deed Details`, { x: titleX, y: 700, size: titleFontSize, color: rgb(0, 0, 0) });
   
-    // Formatting Deed Information with bold labels
+    
     const fontSize = 12;
-    let yPosition = 660; // Start Y position for content
+    let yPosition = 660; 
   
     const addSection = (title, content) => {
       page.drawText(title, { x: 50, y: yPosition, size: fontSize, color: rgb(0, 0, 0) });
-      // Convert content to string to avoid errors
+      
       page.drawText(String(content), { x: 200, y: yPosition, size: fontSize, color: rgb(0, 0, 0) });
-      yPosition -= 20; // Decrease Y position for the next line
+      yPosition -= 20; 
     };
   
     // Deed ID and other details
-    addSection("Deed ID:", deed._id);
+    addSection("Deed No:", deed.deedNo);
     addSection("Lawyer:", lawyers.find(lawyer => lawyer._id === deed.assignedLawyer)?.firstName || "No Lawyer");
     addSection("Deed Type:", deed.deedType);
     addSection("Title:", deed.title);
     addSection("Consideration Value:", deed.considerationValue);
   
-    yPosition -= 20; // Extra space before Grantor and Grantee sections
+    yPosition -= 20; 
   
     // Grantor details
     addSection("Grantor:", deed.grantor ? `${deed.grantor.fname} ${deed.grantor.lname}` : "No Grantor");
@@ -116,7 +116,7 @@ function DemDeedDetail() {
     addSection("Grantor NIC:", deed.grantor ? deed.grantor.nic : "N/A");
     addSection("Grantor Address:", deed.grantor ? deed.grantor.address : "N/A");
   
-    yPosition -= 20; // Extra space before Grantee details
+    yPosition -= 20; 
   
     // Grantee details
     addSection("Grantee:", deed.grantee ? `${deed.grantee.fname} ${deed.grantee.lname}` : "No Grantee");
@@ -124,7 +124,7 @@ function DemDeedDetail() {
     addSection("Grantee NIC:", deed.grantee ? deed.grantee.nic : "N/A");
     addSection("Grantee Address:", deed.grantee ? deed.grantee.address : "N/A");
   
-    yPosition -= 20; // Extra space before Fee details
+    yPosition -= 20; 
   
     // Fees
     addSection("Lawyer Fee:", deed.lawyerFee);
@@ -153,7 +153,7 @@ function DemDeedDetail() {
       <div>
 
         <h2>Deed Details</h2><br/>
-        <p><strong>Deed ID:</strong> {deed._id}</p>
+        <p><strong>Deed No:</strong> {deed.deedNo}</p>
 
         <div className="section-spacing">
           <p><strong>Lawyer:</strong> {getLawyerNameById(deed.assignedLawyer)}</p>
@@ -203,6 +203,7 @@ function DemDeedDetail() {
           sx={{ 
             backgroundColor: '#74512D', 
             color: 'white' 
+            
             }}
           >Edit Deed Details</DialogTitle>
 

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemText, IconButton, ListItemIcon } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import SearchIcon from '@mui/icons-material/Search';
+import { InputBase } from '@mui/material';
+
 import './deed_management.css'
 
 function DeedNavbar() {
@@ -82,6 +85,16 @@ function DeedNavbar() {
 
       {/* Sub-navbar */}
       <div className="subnav-container">
+
+        {/* Search Bar with Icon */}
+        <div className="search-container">
+          <InputBase
+            placeholder="Search…"
+            inputProps={{ 'aria-label': 'search' }}
+            className="subnav-search"
+          />
+          <SearchIcon className="search-icon" />
+        </div>
         
         <Link to="/add_deed" className="subnav-link" aria-label="Add Deed">Add Deed</Link>
         <Link to="/read_all_deeds" className="subnav-link" aria-label="View Recent Deeds">View Recent</Link>
