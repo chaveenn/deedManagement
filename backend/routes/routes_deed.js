@@ -233,23 +233,25 @@ router.get("/nonRegisteredDeeds", async (req, res) => {
     }
 });
 
-// Update deed status
-router.put("/updateStatus/:id", async (req, res) => {
-    const { id } = req.params;
-    const { deedStatus } = req.body;
+// Update status of a deed by ID --------------------------------------------------------------
+router.route("/updateStatus/:id").put(async (req, res) => {
+    const deedID = req.params.id;
+    const { deedStatus } = req.body; 
+
+    const updateStatus = {
+        deedStatus
+    };
 
     try {
-        const deed = await Deed.findById(id);
-        if (!deed) {
-            return res.status(404).json({ message: "Deed not found" });
+        const updatedDeed = await Deed.findByIdAndUpdate(deedID, updateStatus, { new: true });
+        if (updatedDeed) {
+            res.status(200).json({ status: "Deed status updated", updatedDeed });
+        } else {
+            res.status(404).json({ status: "Deed not found" });
         }
-
-        deed.deedStatus = deedStatus;
-        await deed.save();
-
-        res.json({ message: "Deed status updated", deed });
-    } catch (error) {
-        res.status(500).json({ message: "Error updating deed status", error });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ status: "Error with updating deed status", error: err.message });
     }
 });
 

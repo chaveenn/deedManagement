@@ -146,8 +146,7 @@ export default function DeedDashboard() {
                                     <TableCell align="left" className="dem-table-summary-data"><p>{`${deed.grantee.fname} ${deed.grantee.lname}`}</p></TableCell>
                                     <TableCell align="left" className="dem-table-summary-data"><p>{deed.deedStatus}</p></TableCell>
                                     <TableCell align="center" className="dem-table-summary-action">
-                                        <button onClick={() => handleOpenDialog(deed)}>
-                                        Change Status</button>
+                                        <button onClick={() => handleOpenDialog(deed)}>Change Status</button>
                                     </TableCell>
                                 </TableRow>
                             ))}
