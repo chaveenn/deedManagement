@@ -88,14 +88,14 @@
   display: flex;
   justify-content: flex-start; /* Align items to the left */
   align-items: center;
-  padding: 10px 10%;
+  padding: 8px 20px;
   background-color: #f1f1f1;
   margin-bottom: 10px;
 }
 
 .subnav-link {
   margin-left: 40px;
-  color: #74512D;
+  color: #0b0b0be1;
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 600;
@@ -107,22 +107,22 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-right: 350px;
+  margin-right: 500px;
 }
 
 .subnav-search {
-  padding: 5px 10px;
+  padding: 0px 5px;
   padding-left: 30px; 
   margin-right: 10px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 2px solid #0b0b0be1;
   border-radius: 4px;
   width: 400px;
 }
 
 .search-icon {
   left: 10px;
-  color: #74512D;
+  color: #0b0b0be1;
   cursor: pointer;
 }
 

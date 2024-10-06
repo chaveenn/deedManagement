@@ -5,6 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SearchIcon from '@mui/icons-material/Search';
 import { InputBase } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import './deed_management.css'
 
@@ -33,6 +34,16 @@ function DeedNavbar() {
       </ListItem>
     ))
   );
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate(); 
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search/${searchQuery}`);  
+    }
+  };
+  
 
   return (
     <>
@@ -89,11 +100,13 @@ function DeedNavbar() {
         {/* Search Bar with Icon */}
         <div className="search-container">
           <InputBase
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-            className="subnav-search"
+             placeholder="Search…"
+             inputProps={{ 'aria-label': 'search' }}
+             className="subnav-search"
+             value={searchQuery}
+             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <SearchIcon className="search-icon" />
+          <SearchIcon className="search-icon" onClick={handleSearch} />
         </div>
         
         <Link to="/add_deed" className="subnav-link" aria-label="Add Deed">Add Deed</Link>
