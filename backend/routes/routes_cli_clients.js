@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let Client = require("../models/client");
+let Client = require("../models/model_cli_client");
 
 router.route("/add-client").post((req,res)=> {
 

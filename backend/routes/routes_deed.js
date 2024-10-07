@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Deed = require("../models/model_dem_deed");
-const Client = require("../models/client");
+const Client = require("../models/model_cli_client");
 const Lawyer = require("../models/model_atm_lawyer");
 const AppointmentRequest = require("../models/model_apm_appointment_request");
-//const PaymentRequest = require("../models/model_fin_payment_request"); //change according to charitha's file name for payment model
+const PaymentRequest = require("../models/model_fin_Payment_form"); 
 
 
 // Search client with NIC --------------------------------------------------------------
@@ -201,7 +201,7 @@ router.get("/counts", async (req, res) => {
         const appointmentCount = await AppointmentRequest.countDocuments();
 
         // Count payment requests
-        //const paymentRequestCount = await PaymentRequest.countDocuments();
+        const paymentRequestCount = await PaymentRequest.countDocuments();
 
         // Send the counts as a JSON response
         res.status(200).json({
@@ -209,7 +209,7 @@ router.get("/counts", async (req, res) => {
             lawyerCount,
             clientCount,
             appointmentCount,
-            //paymentRequestCount
+            paymentRequestCount
         });
     } catch (error) {
         console.error("Error fetching counts:", error.message);

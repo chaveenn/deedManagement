@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const clientSchema = new Schema ({
-
+    userId: { 
+        type : String,  
+        required : true 
+    }, 
     fname : {
         type : String,
         required : true
@@ -42,7 +45,10 @@ const clientSchema = new Schema ({
     createdDate: {
         type: Date,
         default: Date.now
-    }
+    },
+    userStatus: { 
+        type: String, 
+    }  
     
 });
 
