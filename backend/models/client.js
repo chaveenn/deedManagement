@@ -43,6 +43,7 @@ const clientSchema = new Schema ({
         type: Date,
         default: Date.now
     }
+    
 });
 
 const Client = mongoose.model("Client", clientSchema);

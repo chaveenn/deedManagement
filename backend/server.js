@@ -40,13 +40,14 @@ app.use("/appointmentrequest", appointmentRequestRouter);
 const appointmentRouter = require("./routes/routes_apm_appointment.js");
 app.use("/appointment", appointmentRouter);
 
-
+//deed
 const deedsRouter = require("./routes/routes_deed");
 app.use("/deeds", deedsRouter);
 app.use("/clients", deedsRouter);
 app.use("/lawyers", deedsRouter);
 
-const clients = require("./routes/clients");
-app.use("/clients",clients)
+//client
+const clientRouter = require("./routes/routes_cli_clients.js");
+app.use("/client", clientRouter);
 
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Deed = require("../models/model_dem_deed");
-const Client = require("../models/model_cli_client");
+const Client = require("../models/client");
 const Lawyer = require("../models/model_atm_lawyer");
 const AppointmentRequest = require("../models/model_apm_appointment_request");
 //const PaymentRequest = require("../models/model_fin_payment_request"); //change according to charitha's file name for payment model
