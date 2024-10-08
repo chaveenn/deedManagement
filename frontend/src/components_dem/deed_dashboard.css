@@ -1,4 +1,3 @@
-
 /* General styles */
 body {
     font-family: 'Arial', sans-serif;
@@ -17,13 +16,12 @@ body {
 
 .dashboard-feature-section-top {
     text-align: center;
-    margin-bottom: 20px;
-    
+    margin-bottom: 20px;   
 }
 
 .dashboard-feature-section h1 {
     font-size: 24px;
-    color: #36200a;;
+    color: #36200a;
 }
 
 /* Feature info section */
@@ -60,6 +58,20 @@ body {
     font-weight: bold;
 }
 
+/* Pie chart styles */
+.pie-chart-container {
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(14, 7, 7, 0.1);
+    padding: 20px; /* Add some padding around the chart */
+}
+
+.pie-chart-container h5 {
+    text-align: center; /* Center align the chart title */
+    margin-bottom: 15px; /* Space below the title */
+}
+
 /* Table styles */
 .dem-table-container {
     margin: 20px;
@@ -85,18 +97,14 @@ body {
     padding: 10px;
 }
 
-.dem-table-summary-action button{
+.dem-table-summary-action button {
     width: 100%;
 }
-
 
 /* Button styles */
 .MuiButton-root {
     text-transform: none; 
-    
 }
-
-
 
 /* Dialog styles */
 .MuiDialog-paper {
@@ -117,5 +125,12 @@ body {
     .dashboard-feature-section-info {
         width: 100%;
         margin: 10px 0;
+    }
+
+    /* Adjust pie chart container on small screens */
+    .pie-chart-container {
+        width: 100%; /* Ensure full width on small screens */
+        padding: 10px; /* Less padding on smaller devices */
+        
     }
 }

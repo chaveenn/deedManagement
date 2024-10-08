@@ -233,7 +233,7 @@ router.get("/nonRegisteredDeeds", async (req, res) => {
     }
 });
 
-// Update status of a deed by ID --------------------------------------------------------------
+// Update status of a deed by ID -------------------------------------------------------------------------------
 router.route("/updateStatus/:id").put(async (req, res) => {
     const deedID = req.params.id;
     const { deedStatus } = req.body; 
@@ -255,7 +255,7 @@ router.route("/updateStatus/:id").put(async (req, res) => {
     }
 });
 
-// Search Deeds by lawyer name, client name, and other fields
+// Search Deeds by lawyer name, client name, and other fields------------------------------------------------------
 router.get("/search/:query", async (req, res) => {
     const searchQuery = req.params.query;
 
@@ -310,6 +310,44 @@ router.get("/search/:query", async (req, res) => {
         res.status(500).json({ message: "Error searching deeds", error: error.message });
     }
 });
+
+//Pie Chart-------------------------------------------------------------------------------------
+router.get("/deeds-per-lawyer", async (req, res) => {
+    try {
+        const deedsPerLawyer = await Deed.aggregate([
+            {
+                $group: {
+                    _id: "$assignedLawyer", // Group by lawyer ID
+                    deedCount: { $sum: 1 } // Count number of deeds
+                }
+            },
+            {
+                $lookup: {
+                    from: "lawyers", // Lookup lawyer details from the "lawyers" collection
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "lawyerInfo"
+                }
+            },
+            {
+                $unwind: "$lawyerInfo"
+            },
+            {
+                $project: {
+                    _id: 0,
+                    lawyerName: { $concat: ["$lawyerInfo.firstName", " ", "$lawyerInfo.lastName"] },
+                    deedCount: 1
+                }
+            }
+        ]);
+
+        res.json(deedsPerLawyer);
+    } catch (error) {
+        console.error("Error fetching deeds per lawyer:", error);
+        res.status(500).send("Server Error");
+    }
+});
+
 
 
 

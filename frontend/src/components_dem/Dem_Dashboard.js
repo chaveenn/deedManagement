@@ -10,6 +10,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import ScheduleIcon from '@mui/icons-material/Schedule'; 
 import PaymentIcon from '@mui/icons-material/Payment'; 
 import './deed_dashboard.css';
+import {PieChart,Pie,Cell,Tooltip,Legend,ResponsiveContainer} from "recharts";
 
 const featureInfoData = [
     {
@@ -51,10 +52,16 @@ export default function DeedDashboard() {
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedDeed, setSelectedDeed] = useState(null);
     const [newStatus, setNewStatus] = useState('');
+    const [deedsPerLawyer, setDeedsPerLawyer] = useState([]);
+
 
     useEffect(() => {
         fetchCounts();
         fetchNonRegisteredDeeds();
+    }, []);
+
+    useEffect(() => {
+        fetchDeedsPerLawyer();
     }, []);
 
     const fetchCounts = async () => {
@@ -103,6 +110,31 @@ export default function DeedDashboard() {
         }
     };
 
+    const fetchDeedsPerLawyer = async () => {
+        try {
+            const response = await axios.get("http://localhost:8070/deeds/deeds-per-lawyer");
+            setDeedsPerLawyer(response.data);
+        } catch (error) {
+            console.error("Error fetching deeds per lawyer:", error);
+        }
+    };
+
+    const COLORS = [
+        "#D9CBAF",
+        "#E2B400", 
+        "#A97B5D",
+        "#B09C7A",
+        "#6F4C3E",
+        "#D7B19C", 
+        "#A68A77", 
+        "#8C6A5A", 
+        "#4E3B31",
+        "#E1C6B0" 
+    ];
+    
+    
+    
+
     return (
         <div>
             <NavBar />
@@ -120,6 +152,30 @@ export default function DeedDashboard() {
                 ))}
             </div>
         </div>
+        
+        <div className="pie-chart-container">
+                <h3 variant="h5" gutterBottom>Success Rate of Deeds by Lawyer</h3>
+                <ResponsiveContainer width="100%" height={400}>
+                    <PieChart>
+                        <Pie
+                            data={deedsPerLawyer}
+                            dataKey="deedCount"
+                            nameKey="lawyerName"
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={100}
+                            fill="#8884d8"
+                            label
+                        >
+                            {deedsPerLawyer.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                        <Legend />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
 
 
             {/* table - not registered deed*/}
